@@ -19,10 +19,9 @@ button{
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     height: 90vh;
-    min-height: 700px;
-    max-width: 425px;
-    min-width: 400px;
-    max-height: 800px;
+    min-height: 600px;
+    width: calc(90vh / 1.9);
+    min-width: 325px;
     border-radius: 30px;
     color: var(--color-light);
     background-color: var(--color-dark);
