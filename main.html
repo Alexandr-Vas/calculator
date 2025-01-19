@@ -9,32 +9,32 @@
 </head>
 <body>
     <div class="calculator">
-        <div class="screen">0</div>
+        <input type="text" disabled id="output" class="calc_output" value="0">
 
         <div class="buttons">
-            <button type="button" class="btn bg-color-gray" id="ac">AC</button>
-            <button type="button" class="btn bg-color-gray" id="+/-">+/-</button>
-            <button type="button" class="btn bg-color-gray" id="%">%</button>
-            <button type="button" class="btn bg-color-orange" id="/">/</button>
+            <button type="button" class="btn bg-color-gray" id="ac" data-type="clear">AC</button>
+            <button type="button" class="btn bg-color-gray" id="+/-" data-type="operator">+/-</button>
+            <button type="button" class="btn bg-color-gray" id="%" data-type="operator">%</button>
+            <button type="button" class="btn bg-color-orange" id="/" data-type="operator">/</button>
 
-            <button type="button" class="btn" id="7">7</button>
-            <button type="button" class="btn" id="8">8</button>
-            <button type="button" class="btn" id="9">9</button>
-            <button type="button" class="btn bg-color-orange" id="*">*</button>
+            <button type="button" class="btn" id="7" data-type="operand">7</button>
+            <button type="button" class="btn" id="8" data-type="operand">8</button>
+            <button type="button" class="btn" id="9" data-type="operand">9</button>
+            <button type="button" class="btn bg-color-orange" id="*" data-type="operator">*</button>
 
-            <button type="button" class="btn" id="4">4</button>
-            <button type="button" class="btn" id="5">5</button>
-            <button type="button" class="btn" id="6">6</button>
-            <button type="button" class="btn bg-color-orange" id="-">-</button>
+            <button type="button" class="btn" id="4" data-type="operand">4</button>
+            <button type="button" class="btn" id="5" data-type="operand">5</button>
+            <button type="button" class="btn" id="6" data-type="operand">6</button>
+            <button type="button" class="btn bg-color-orange" id="-" data-type="operator">-</button>
 
-            <button type="button" class="btn" id="1">1</button>
-            <button type="button" class="btn" id="2">2</button>
-            <button type="button" class="btn" id="3">3</button>
-            <button type="button" class="btn bg-color-orange" id="+">+</button>
+            <button type="button" class="btn" id="1" data-type="operand">1</button>
+            <button type="button" class="btn" id="2" data-type="operand">2</button>
+            <button type="button" class="btn" id="3" data-type="operand">3</button>
+            <button type="button" class="btn bg-color-orange" id="+" data-type="operator">+</button>
 
-            <button type="button" class="btn zero" id="0">0</button>
-            <button type="button" class="btn" id="dot">.</button>
-            <button type="button" class="btn bg-color-orange" id="equals">=</button>
+            <button type="button" class="btn zero" id="0" data-type="operand">0</button>
+            <button type="button" class="btn" id="dot" data-type="operand">.</button>
+            <button type="button" class="btn bg-color-orange" id="equals" data-type="operator">=</button>
         </div>
         <script src="script.js"></script>
     </div>
