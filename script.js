@@ -3,7 +3,8 @@ const buttons = document.querySelectorAll(".btn");
 
 let arraySolutionChars = [];
 
-let equation = [];
+let calcHistory = [];
+
 
 buttons.forEach((button) => {
     button.addEventListener("click", function(event){
@@ -53,8 +54,9 @@ buttons.forEach((button) => {
                 break;
 
             case "=":
-                result = eval(output.value);
-                
+                calcHistory.push(output.value);
+                output.value = eval(calcHistory.join(""));
+                calcHistory = [];
                 break;            
 
 
