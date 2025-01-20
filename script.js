@@ -56,7 +56,9 @@ buttons.forEach((button) => {
             case "=":
                 calcHistory.push(output.value);
                 output.value = eval(calcHistory.join(""));
+                arraySolutionChars = []
                 calcHistory = [];
+                arraySolutionChars.push(output.value)
                 break;            
 
 
