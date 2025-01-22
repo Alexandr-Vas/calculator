@@ -86,12 +86,15 @@ buttons.forEach((button) => {
                             case "-":
                                 startNumber -= Number(solutionArray[i+1]);
                                 result = startNumber;
+                                break;
                             case "*":
                                 startNumber *= Number(solutionArray[i+1]);
                                 result = startNumber;
+                                break;
                             case "/":
                                 startNumber /= Number(solutionArray[i+1]);
                                 result = startNumber;
+                                break;
                             default:
                                 break;
                         }
