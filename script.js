@@ -3,24 +3,42 @@ const buttons = document.querySelectorAll(".btn");
 
 let arraySolutionChars = [];
 
-let calcHistory = [];
+let solutionArray = [];
+
+let result;
 
 
 buttons.forEach((button) => {
     button.addEventListener("click", function(event){
         let btnValue = event.target.innerHTML;
 
-        function changeOperatorInOutput(arraySolution){
-            let last_item = arraySolution[arraySolution.length - 1];
+        function changeOperatorInOutput(arraySolutionChars){
+            let last_item = arraySolutionChars[arraySolutionChars.length - 1];
         
                 if(["/", "*", "+", "-"].includes(last_item)) {
-                    arraySolution.pop();
-                    arraySolution.push(btnValue);
-                    output.value = arraySolution.join("");
+                    arraySolutionChars.pop();
+                    arraySolutionChars.push(btnValue);
+                    output.value = arraySolutionChars.join("");
                 } else {
-                    arraySolution.push(btnValue);
-                    output.value = arraySolution.join("");
+                    arraySolutionChars.push(btnValue);
+                    output.value = arraySolutionChars.join("");
                 }
+        }
+
+        function getSolutionArray(arraySolutionChars, solutionArray){
+            let number = "";
+            arraySolutionChars.forEach((element,index) => {
+                if (["/", "*", "+", "-"].includes(arraySolutionChars[index])) {
+                    solutionArray.push(number);
+                    number = "";
+                    solutionArray.push(element);
+                }
+                if(Number(element)){
+                    number += element;
+                }        
+            });
+            solutionArray.push(number);
+            
         }
 
         switch (btnValue) {
@@ -54,11 +72,37 @@ buttons.forEach((button) => {
                 break;
 
             case "=":
-                calcHistory.push(output.value);
-                output.value = eval(calcHistory.join(""));
-                arraySolutionChars = []
-                calcHistory = [];
-                arraySolutionChars.push(output.value)
+                getSolutionArray(arraySolutionChars,solutionArray);
+                console.log(solutionArray);
+
+                let startNumber = Number(solutionArray[0]);
+                for (let i = 0; i < solutionArray.length; i++) {
+                    if (["/", "*", "+", "-"].includes(solutionArray[i])) {
+                        switch (solutionArray[i]) {
+                            case "+":
+                                startNumber += Number(solutionArray[i+1]);
+                                result = startNumber;
+                                break;
+                            case "-":
+                                startNumber -= Number(solutionArray[i+1]);
+                                result = startNumber;
+                            case "*":
+                                startNumber *= Number(solutionArray[i+1]);
+                                result = startNumber;
+                            case "/":
+                                startNumber /= Number(solutionArray[i+1]);
+                                result = startNumber;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+                output.value = result;
+
+                solutionArray = [];
+                arraySolutionChars = [];
+                arraySolutionChars.push(output.value);
                 break;            
 
 
