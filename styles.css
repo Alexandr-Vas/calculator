@@ -42,7 +42,7 @@ button{
 }
 
 .calc_output{
-    font-size: 6rem;
+    font-size: 5rem;
     background-color: transparent;
     text-align: end;
     color: var(--color-light);
