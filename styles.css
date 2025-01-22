@@ -33,6 +33,14 @@ button{
     justify-content: end;
 }
 
+.calc_solution{
+    font-size: 2.5rem;
+    background-color: transparent;
+    text-align: end;
+    color: var(--color-light);
+    border: 0px;
+}
+
 .calc_output{
     font-size: 6rem;
     background-color: transparent;

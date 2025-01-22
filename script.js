@@ -1,5 +1,6 @@
 const output = document.querySelector(".calc_output");
 const buttons = document.querySelectorAll(".btn");
+const outputSolution = document.querySelector(".calc_solution");
 
 let arraySolutionChars = [];
 
@@ -44,6 +45,7 @@ buttons.forEach((button) => {
         switch (btnValue) {
             case "AC":
                 output.value= "0";
+                outputSolution.value = '';
                 arraySolutionChars = [];
                 break;
 
@@ -103,6 +105,8 @@ buttons.forEach((button) => {
 
                 output.value = result;
 
+                
+                outputSolution.value = solutionArray.join('');
                 solutionArray = [];
                 arraySolutionChars = [];
                 arraySolutionChars.push(output.value);
