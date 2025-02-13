@@ -1,127 +1,143 @@
-const output = document.querySelector(".calc_output");
+const displayOutput = document.querySelector(".calc_output");
 const buttons = document.querySelectorAll(".btn");
-const outputSolution = document.querySelector(".calc_solution");
+const solutionHistory = document.querySelector(".solution_history");
 
-let arraySolutionChars = [];
+let expression = '';
 
-let solutionArray = [];
+let result = '';
 
-let result;
+function getOperationResult(a, operator, b) {
+    a = Number(a);
+    b = Number(b);
+  
+    switch (operator) {
+      case '+':
+        return a + b;
+      case '-':
+        return a - b;
+      case '*':
+        return a * b;
+      case '/':
+        return a / b;
+      default:
+        return b;
+    }
+}
+
+function getCalculateResult(expression) {
+    const tokens = expression.split(/([\+\-\*\/])/);
+    const numbers = [];
+    const operators = [];
+    
+  
+    tokens.forEach((token) => {
+        if (['+', '-', '*', '/'].includes(token)) {
+            operators.push(token);
+        } else {
+            numbers.push(token);
+        }  
+    });
+
+    for (let i = 0; i < operators.length; i++) {
+      if (operators[i] === '*' || operators[i] === '/') {
+        const result = getOperationResult(numbers[i], operators[i], numbers[i + 1]);
+        numbers.splice(i, 2, result);
+        operators.splice(i, 1);
+        i--;
+      }
+    }
+  
+    
+    let total = numbers[0];
+    for (let i = 0; i < operators.length; i++) {
+      total = getOperationResult(total, operators[i], numbers[i + 1]);
+    }
+  
+    return total;
+}
+
 
 
 buttons.forEach((button) => {
     button.addEventListener("click", function(event){
-        let btnValue = event.target.innerHTML;
+        let buttonValue = event.target.innerHTML;
 
-        function changeOperatorInOutput(arraySolutionChars){
-            let last_item = arraySolutionChars[arraySolutionChars.length - 1];
-        
-                if(["/", "*", "+", "-"].includes(last_item)) {
-                    arraySolutionChars.pop();
-                    arraySolutionChars.push(btnValue);
-                    output.value = arraySolutionChars.join("");
-                } else {
-                    arraySolutionChars.push(btnValue);
-                    output.value = arraySolutionChars.join("");
-                }
-        }
-
-        function getSolutionArray(arraySolutionChars, solutionArray){
-            let number = "";
-            arraySolutionChars.forEach((element,index) => {
-                if (["/", "*", "+", "-"].includes(arraySolutionChars[index])) {
-                    solutionArray.push(number);
-                    number = "";
-                    solutionArray.push(element);
-                }
-                if(Number(element)){
-                    number += element;
-                }        
-            });
-            solutionArray.push(number);
-            
-        }
-
-        switch (btnValue) {
+        switch (buttonValue) {
             case "AC":
-                output.value= "0";
-                outputSolution.value = '';
-                arraySolutionChars = [];
+                displayOutput.value= "0";
+                solutionHistory.value = '';
                 break;
 
             case "+/-":
-                output.value = parseFloat(output.value) * -1;
+                displayOutput.value = parseFloat(displayOutput.value) * -1;
                 break;
 
             case "%":
-                output.value= parseFloat(output.value) / 100;
+                displayOutput.value= parseFloat(displayOutput.value) / 100;
                 break;
 
             case "/":
-                changeOperatorInOutput(arraySolutionChars)
+                if (displayOutput.value == 0){
+                    break;
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
+                    displayOutput.value += buttonValue;
+                }
                 break;
 
             case "*":
-                changeOperatorInOutput(arraySolutionChars);
+                if (displayOutput.value == 0){
+                    break;
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
+                    displayOutput.value += buttonValue;
+                }
                 break;
             
             case "-":
-                changeOperatorInOutput(arraySolutionChars);
+                if (displayOutput.value == 0){
+                    break;
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
+                    displayOutput.value += buttonValue;
+                }
                 break;
 
             case "+":
-                changeOperatorInOutput(arraySolutionChars);
+                if (displayOutput.value == 0){
+                    break;
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
+                    displayOutput.value += buttonValue;
+                }
                 break;
 
             case "=":
-                getSolutionArray(arraySolutionChars,solutionArray);
-                console.log(solutionArray);
+                result = String(getCalculateResult(expression));
+                displayOutput.value = result;
+                solutionHistory.value = expression;
 
-                let startNumber = Number(solutionArray[0]);
-                for (let i = 0; i < solutionArray.length; i++) {
-                    if (["/", "*", "+", "-"].includes(solutionArray[i])) {
-                        switch (solutionArray[i]) {
-                            case "+":
-                                startNumber += Number(solutionArray[i+1]);
-                                result = startNumber;
-                                break;
-                            case "-":
-                                startNumber -= Number(solutionArray[i+1]);
-                                result = startNumber;
-                                break;
-                            case "*":
-                                startNumber *= Number(solutionArray[i+1]);
-                                result = startNumber;
-                                break;
-                            case "/":
-                                startNumber /= Number(solutionArray[i+1]);
-                                result = startNumber;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-
-                output.value = result;
-
-                
-                outputSolution.value = solutionArray.join('');
-                solutionArray = [];
-                arraySolutionChars = [];
-                arraySolutionChars.push(output.value);
                 break;            
 
 
             
 
             default:
-                if (output.value === "0" && btnValue !==".") {
-                    output.value = btnValue;
+                if (displayOutput.value === "0" && buttonValue !==".") {
+                    displayOutput.value = buttonValue;
                     } else {
-                    output.value += btnValue
+                    displayOutput.value += buttonValue
                     }
-                arraySolutionChars.push(btnValue);    
         }
+
+        expression = displayOutput.value;
     })
 });
