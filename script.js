@@ -81,10 +81,7 @@ buttons.forEach((button) => {
                     break;
                 }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
                     displayOutput.value += buttonValue;
-                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
-                  displayOutput.value += buttonValue;
                 }
-                
                 break;
 
             case "*":
