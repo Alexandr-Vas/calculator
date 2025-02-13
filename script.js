@@ -24,7 +24,7 @@ function getOperationResult(a, operator, b) {
     }
 }
 
-function calculate(expression) {
+function getCalculateResult(expression) {
     const tokens = expression.split(/([\+\-\*\/])/);
     const numbers = [];
     const operators = [];
@@ -81,7 +81,10 @@ buttons.forEach((button) => {
                     break;
                 }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
                     displayOutput.value += buttonValue;
-                  }
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                  displayOutput.value += buttonValue;
+                }
+                
                 break;
 
             case "*":
@@ -89,7 +92,7 @@ buttons.forEach((button) => {
                     break;
                 }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
                     displayOutput.value += buttonValue;
-                  }
+                }
                 break;
             
             case "-":
@@ -97,7 +100,7 @@ buttons.forEach((button) => {
                     break;
                 }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
                     displayOutput.value += buttonValue;
-                  }
+                }
                 break;
 
             case "+":
@@ -105,11 +108,11 @@ buttons.forEach((button) => {
                     break;
                 }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
                     displayOutput.value += buttonValue;
-                  }
+                }
                 break;
 
             case "=":
-                result = String(calculate(expression));
+                result = String(getCalculateResult(expression));
                 displayOutput.value = result;
                 solutionHistory.value = expression;
 
