@@ -79,7 +79,10 @@ buttons.forEach((button) => {
             case "/":
                 if (displayOutput.value == 0){
                     break;
-                }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
                     displayOutput.value += buttonValue;
                 }
                 break;
@@ -87,7 +90,10 @@ buttons.forEach((button) => {
             case "*":
                 if (displayOutput.value == 0){
                     break;
-                }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
                     displayOutput.value += buttonValue;
                 }
                 break;
@@ -95,7 +101,10 @@ buttons.forEach((button) => {
             case "-":
                 if (displayOutput.value == 0){
                     break;
-                }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
                     displayOutput.value += buttonValue;
                 }
                 break;
@@ -103,7 +112,10 @@ buttons.forEach((button) => {
             case "+":
                 if (displayOutput.value == 0){
                     break;
-                }else if(!['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                }else if(['+', '-', '*', '/'].includes(expression[expression.length - 1])) {
+                    displayOutput.value = displayOutput.value.slice(0, -1);
+                    displayOutput.value += buttonValue;                    
+                }else{
                     displayOutput.value += buttonValue;
                 }
                 break;
